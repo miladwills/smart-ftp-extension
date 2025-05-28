@@ -1,0 +1,23 @@
+# Exclude build output, source files, and dev dependencies
+.vscode/**
+.vscode-test/**
+.git/**
+.github/**
+src/**
+out/**
+node_modules/**
+*.vsix
+*.zip
+
+# Config files not needed in package
+.gitignore
+.eslintrc.json
+tsconfig.json
+
+# Keep essential files
+!LICENSE
+!README.md
+!package.json
+!assets/**
+!dist/**
+

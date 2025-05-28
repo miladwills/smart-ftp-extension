@@ -1,0 +1,122 @@
+{
+  "name": "smart-ftp",
+  "displayName": "Smart FTP",
+  "description": "Intelligent FTP client with auto-connect, file watching, and seamless uploads",
+  "version": "1.5.2",
+  "publisher": "midowills66",
+  "author": "Smart FTP Team",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartftp/smart-ftp-extension"
+  },
+  "keywords": [
+    "ftp",
+    "sftp",
+    "upload",
+    "file-sync",
+    "auto-upload",
+    "deployment",
+    "file-watcher",
+    "sync"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartftp.createConfig",
+        "title": "Create FTP Configuration",
+        "category": "Smart FTP"
+      },
+      {
+        "command": "smartftp.connect",
+        "title": "Connect to FTP Server",
+        "category": "Smart FTP"
+      },
+      {
+        "command": "smartftp.disconnect",
+        "title": "Disconnect from FTP Server",
+        "category": "Smart FTP"
+      },
+      {
+        "command": "smartftp.uploadFile",
+        "title": "Upload Current File",
+        "category": "Smart FTP"
+      },
+      {
+        "command": "smartftp.uploadWorkspace",
+        "title": "Upload Entire Workspace",
+        "category": "Smart FTP"
+      },
+      {
+        "command": "smartftp.syncServerToLocal",
+        "title": "Sync Remote Files to Local",
+        "category": "Smart FTP"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "smartftp.createConfig"
+        },
+        {
+          "command": "smartftp.connect"
+        },
+        {
+          "command": "smartftp.disconnect"
+        },
+        {
+          "command": "smartftp.uploadFile"
+        },
+        {
+          "command": "smartftp.uploadWorkspace"
+        },
+        {
+          "command": "smartftp.syncServerToLocal"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "smartftp.uploadFile",
+          "when": "!explorerResourceIsFolder",
+          "group": "smartftp@1"
+        },
+        {
+          "command": "smartftp.syncServerToLocal",
+          "when": "explorerResourceIsFolder",
+          "group": "smartftp@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build:bundle",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build:bundle": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --platform=node --format=cjs --external:vscode",
+    "build": "npm-run-all compile build:bundle"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "esbuild": "^0.25.5",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.3",
+    "canvas": "^3.1.0",
+    "chokidar": "^3.5.3",
+    "sharp": "^0.34.2"
+  }
+}
